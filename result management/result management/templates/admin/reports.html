@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - Result Management System{% endblock %}
+
+{% block content %}
+<div class="dashboard-container py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="animated-heading">
+                    <i class="fas fa-chart-bar me-2"></i>Reports
+                </h2>
+                <p class="text-muted">View performance reports and analytics</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="report-card animated-card">
+                    <div class="report-icon bg-primary">
+                        <i class="fas fa-users fa-3x"></i>
+                    </div>
+                    <h4>Class Performance</h4>
+                    <p>View semester-wise class performance report</p>
+                    <a href="{{ url_for('class_performance') }}" class="btn btn-primary animated-btn">
+                        <i class="fas fa-eye me-2"></i>View Report
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="report-card animated-card">
+                    <div class="report-icon bg-success">
+                        <i class="fas fa-book fa-3x"></i>
+                    </div>
+                    <h4>Subject Analysis</h4>
+                    <p>Analyze performance subject-wise</p>
+                    <a href="{{ url_for('subject_analysis') }}" class="btn btn-success animated-btn">
+                        <i class="fas fa-eye me-2"></i>View Report
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="report-card animated-card">
+                    <div class="report-icon bg-warning">
+                        <i class="fas fa-trophy fa-3x"></i>
+                    </div>
+                    <h4>Toppers List</h4>
+                    <p>View top performing students</p>
+                    <a href="{{ url_for('toppers_list') }}" class="btn btn-warning animated-btn">
+                        <i class="fas fa-eye me-2"></i>View Report
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

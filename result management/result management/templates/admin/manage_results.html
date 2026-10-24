@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Results - Result Management System{% endblock %}
+
+{% block content %}
+<div class="dashboard-container py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="animated-heading">
+                    <i class="fas fa-clipboard-list me-2"></i>Manage Results
+                </h2>
+                <p class="text-muted">View, publish, and manage student results</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <a href="{{ url_for('generate_results') }}" class="btn btn-primary animated-btn">
+                    <i class="fas fa-calculator me-2"></i>Generate New Results
+                </a>
+            </div>
+        </div>
+
+        <div class="card animated-card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover animated-table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Student</th>
+                                <th>Semester</th>
+                                <th>Total Marks</th>
+                                <th>Percentage</th>
+                                <th>GPA</th>
+                                <th>CGPA</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                            <tr>
+                                <td>{{ result.student.name }} ({{ result.student.roll_number }})</td>
+                                <td>{{ result.semester }}</td>
+                                <td>{{ result.total_marks_obtained }}/{{ result.total_maximum_marks }}</td>
+                                <td>{{ result.percentage|round(2) }}%</td>
+                                <td>{{ result.gpa }}</td>
+                                <td>{{ result.cgpa }}</td>
+                                <td>
+                                    <span class="badge {% if result.grade == 'A' %}bg-success{% elif result.grade == 'B' %}bg-primary{% elif result.grade == 'C' %}bg-info{% elif result.grade == 'D' %}bg-warning{% else %}bg-danger{% endif %}">
+                                        {{ result.grade }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if result.is_published %}
+                                    <span class="badge bg-success">Published</span>
+                                    {% else %}
+                                    <span class="badge bg-warning">Draft</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if result.is_published %}
+                                    <a href="{{ url_for('unpublish_result', result_id=result.id) }}" class="btn btn-sm btn-warning animated-btn" onclick="return confirm('Are you sure you want to unpublish this result?')">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </a>
+                                    {% else %}
+                                    <a href="{{ url_for('publish_result', result_id=result.id) }}" class="btn btn-sm btn-success animated-btn" onclick="return confirm('Are you sure you want to publish this result?')">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="9" class="text-center">No results found. Generate results first.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

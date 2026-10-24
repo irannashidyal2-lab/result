@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Subject Analysis - Result Management System{% endblock %}
+
+{% block content %}
+<div class="dashboard-container py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="animated-heading">
+                    <i class="fas fa-chart-bar me-2"></i>Subject Analysis Report
+                </h2>
+                <p class="text-muted">Analyze student performance subject-wise</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <form method="GET" action="{{ url_for('subject_analysis') }}">
+                    <div class="form-floating mb-2">
+                        <select class="form-select" id="subject_id" name="subject_id">
+                            <option value="">Select Subject</option>
+                            {% for subj in subjects %}
+                            <option value="{{ subj.id }}" {{ 'selected' if subject and subject.id == subj.id else '' }}>
+                                {{ subj.code }} - {{ subj.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <label for="subject_id">Subject</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary animated-btn w-100">
+                        <i class="fas fa-filter me-2"></i>Filter
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {% if marks %}
+        <div class="row mb-4">
+            <div class="col-md-3">
+                {% set avg_marks = (marks|sum(attribute='marks_obtained') / marks|length)|round(2) %}
+                <div class="stat-card animated-card bg-primary text-white">
+                    <div class="stat-info">
+                        <h3>{{ avg_marks }}</h3>
+                        <p>Average Marks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                {% set max_marks = marks|map(attribute='marks_obtained')|max %}
+                <div class="stat-card animated-card bg-success text-white">
+                    <div class="stat-info">
+                        <h3>{{ max_marks }}</h3>
+                        <p>Highest Marks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                {% set min_marks = marks|map(attribute='marks_obtained')|min %}
+                <div class="stat-card animated-card bg-info text-white">
+                    <div class="stat-info">
+                        <h3>{{ min_marks }}</h3>
+                        <p>Lowest Marks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                {% set passed = marks|selectattr('marks_obtained', '>=', 40)|list|length %}
+                <div class="stat-card animated-card bg-warning text-white">
+                    <div class="stat-info">
+                        <h3>{{ passed }}</h3>
+                        <p>Passed Students</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card animated-card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">
+                    <i class="fas fa-book me-2"></i>{{ subject.code }} - {{ subject.name }}
+                </h5>
+                <div class="table-responsive">
+                    <table class="table table-hover animated-table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Student</th>
+                                <th>Roll Number</th>
+                                <th>Marks Obtained</th>
+                                <th>Total Marks</th>
+                                <th>Percentage</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mark in marks|sort(attribute='marks_obtained', reverse=true) %}
+                            <tr>
+                                <td>{{ mark.student.name }}</td>
+                                <td>{{ mark.student.roll_number }}</td>
+                                <td>{{ mark.marks_obtained }}</td>
+                                <td>{{ mark.total_marks }}</td>
+                                <td>{{ (mark.marks_obtained / mark.total_marks * 100)|round(2) }}%</td>
+                                <td>
+                                    {% set percentage = (mark.marks_obtained / mark.total_marks * 100) %}
+                                    <span class="badge {% if percentage >= 90 %}bg-success{% elif percentage >= 80 %}bg-primary{% elif percentage >= 70 %}bg-info{% elif percentage >= 60 %}bg-warning{% else %}bg-danger{% endif %}">
+                                        {% if percentage >= 90 %}A{% elif percentage >= 80 %}B{% elif percentage >= 70 %}C{% elif percentage >= 60 %}D{% else %}F{% endif %}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>Please select a subject to view analysis.
+        </div>
+        {% endif %}
+
+        <div class="mt-3">
+            <a href="{{ url_for('reports') }}" class="btn btn-secondary animated-btn">
+                <i class="fas fa-arrow-left me-2"></i>Back to Reports
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

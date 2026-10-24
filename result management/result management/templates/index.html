@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Result Management System{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="display-3 fw-bold animated-title">
+                    <i class="fas fa-graduation-cap text-primary me-3"></i>
+                    Result Management<br>
+                    <span class="text-primary">System</span>
+                </h1>
+                <p class="lead animated-subtitle mt-4">
+                    A comprehensive web-based platform for managing student examination results efficiently and securely.
+                </p>
+                <div class="mt-5 animated-buttons">
+                    <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-3 animated-btn">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </a>
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-primary btn-lg animated-btn">
+                        <i class="fas fa-user-plus me-2"></i>Register
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                <div class="hero-image animated-image">
+                    <i class="fas fa-chart-line fa-10x text-primary opacity-25"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 animated-heading">
+            <i class="fas fa-star me-2"></i>Key Features
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card animated-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt fa-3x"></i>
+                    </div>
+                    <h4>Secure Authentication</h4>
+                    <p>Advanced security measures to protect student data and ensure privacy.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card animated-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator fa-3x"></i>
+                    </div>
+                    <h4>Auto Grade Calculation</h4>
+                    <p>Automatic calculation of grades, GPA, and CGPA with instant results.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card animated-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar fa-3x"></i>
+                    </div>
+                    <h4>Performance Reports</h4>
+                    <p>Detailed analytics and reports for class and subject-wise performance.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card animated-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf fa-3x"></i>
+                    </div>
+                    <h4>PDF Download</h4>
+                    <p>Download result reports in PDF format for official documentation.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card animated-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt fa-3x"></i>
+                    </div>
+                    <h4>User-Friendly Dashboard</h4>
+                    <p>Intuitive interface for easy navigation and quick access to features.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card animated-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt fa-3x"></i>
+                    </div>
+                    <h4>Responsive Design</h4>
+                    <p>Access the system from any device with our responsive design.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Section -->
+<div class="about-section py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="animated-heading">
+                    <i class="fas fa-info-circle me-2"></i>About the System
+                </h2>
+                <p class="mt-4">
+                    The Result Management System is a web-based application developed using Python Flask that automates the process of recording, managing, and publishing student examination results.
+                </p>
+                <p>
+                    Educational institutions traditionally manage results manually or through semi-digital systems, which can lead to errors, delays, and data mismanagement. This project provides a centralized digital platform for storing grades, and generating results efficiently.
+                </p>
+            </div>
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                <div class="about-icon animated-icon">
+                    <i class="fas fa-university fa-8x text-primary"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

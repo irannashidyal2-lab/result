@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Edit' if edit else 'Add' }} Student - Result Management System{% endblock %}
+
+{% block content %}
+<div class="dashboard-container py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="animated-heading">
+                    <i class="fas fa-user-{{ 'edit' if edit else 'plus' }} me-2"></i>{{ 'Edit' if edit else 'Add' }} Student
+                </h2>
+                <p class="text-muted">{{ 'Update student information' if edit else 'Register a new student' }}</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card animated-card">
+                    <div class="card-body">
+                        <form method="POST" action="{{ url_for('edit_student', student_id=student.id) if edit else url_for('add_student') }}">
+                            {% if not edit %}
+                            <div class="form-floating mb-3 animated-input">
+                                <input type="text" class="form-control" id="roll_number" name="roll_number" placeholder="Roll Number" required>
+                                <label for="roll_number"><i class="fas fa-id-card me-2"></i>Roll Number</label>
+                            </div>
+                            {% endif %}
+                            <div class="form-floating mb-3 animated-input">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" value="{{ student.name if edit else '' }}" required>
+                                <label for="name"><i class="fas fa-user me-2"></i>Full Name</label>
+                            </div>
+                            <div class="form-floating mb-3 animated-input">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ student.email if edit else '' }}" required>
+                                <label for="email"><i class="fas fa-envelope me-2"></i>Email</label>
+                            </div>
+                            <div class="form-floating mb-3 animated-input">
+                                <select class="form-select" id="semester" name="semester" required>
+                                    <option value="">Select Semester</option>
+                                    <option value="1" {{ 'selected' if edit and student.semester == 1 else '' }}>Semester 1</option>
+                                    <option value="2" {{ 'selected' if edit and student.semester == 2 else '' }}>Semester 2</option>
+                                    <option value="3" {{ 'selected' if edit and student.semester == 3 else '' }}>Semester 3</option>
+                                    <option value="4" {{ 'selected' if edit and student.semester == 4 else '' }}>Semester 4</option>
+                                    <option value="5" {{ 'selected' if edit and student.semester == 5 else '' }}>Semester 5</option>
+                                    <option value="6" {{ 'selected' if edit and student.semester == 6 else '' }}>Semester 6</option>
+                                    <option value="7" {{ 'selected' if edit and student.semester == 7 else '' }}>Semester 7</option>
+                                    <option value="8" {{ 'selected' if edit and student.semester == 8 else '' }}>Semester 8</option>
+                                </select>
+                                <label for="semester"><i class="fas fa-layer-group me-2"></i>Semester</label>
+                            </div>
+                            <div class="form-floating mb-3 animated-input">
+                                <select class="form-select" id="department" name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Computer Science" {{ 'selected' if edit and student.department == 'Computer Science' else '' }}>Computer Science</option>
+                                    <option value="Information Technology" {{ 'selected' if edit and student.department == 'Information Technology' else '' }}>Information Technology</option>
+                                    <option value="Electronics" {{ 'selected' if edit and student.department == 'Electronics' else '' }}>Electronics</option>
+                                    <option value="Mechanical" {{ 'selected' if edit and student.department == 'Mechanical' else '' }}>Mechanical</option>
+                                    <option value="Civil" {{ 'selected' if edit and student.department == 'Civil' else '' }}>Civil</option>
+                                </select>
+                                <label for="department"><i class="fas fa-building me-2"></i>Department</label>
+                            </div>
+                            <div class="form-floating mb-3 animated-input">
+                                <input type="text" class="form-control" id="academic_year" name="academic_year" placeholder="Academic Year" value="{{ student.academic_year if edit else '' }}" required>
+                                <label for="academic_year"><i class="fas fa-calendar me-2"></i>Academic Year</label>
+                            </div>
+                            {% if not edit %}
+                            <div class="form-floating mb-3 animated-input">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                <label for="username"><i class="fas fa-at me-2"></i>Username</label>
+                            </div>
+                            <div class="form-floating mb-3 animated-input">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
+                            </div>
+                            {% endif %}
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg animated-btn">
+                                    <i class="fas fa-{{ 'save' if edit else 'plus' }} me-2"></i>{{ 'Update' if edit else 'Add' }} Student
+                                </button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="{{ url_for('manage_students') }}" class="btn btn-secondary animated-btn">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Students
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

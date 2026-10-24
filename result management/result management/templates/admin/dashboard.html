@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Result Management System{% endblock %}
+
+{% block content %}
+<div class="dashboard-container py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="animated-heading">
+                    <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
+                </h2>
+                <p class="text-muted">Welcome, Admin! Here's an overview of the system.</p>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="stat-card animated-card bg-primary text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-users fa-3x"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ total_students }}</h3>
+                        <p>Total Students</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card animated-card bg-success text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-book fa-3x"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ total_subjects }}</h3>
+                        <p>Total Subjects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card animated-card bg-info text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-clipboard-list fa-3x"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ total_results }}</h3>
+                        <p>Total Results</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card animated-card bg-warning text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle fa-3x"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ published_results }}</h3>
+                        <p>Published Results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h4 class="mb-4 animated-heading">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h4>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <a href="{{ url_for('add_student') }}" class="quick-action-card animated-card text-decoration-none">
+                            <div class="text-center">
+                                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                                <h5>Add Student</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('add_subject') }}" class="quick-action-card animated-card text-decoration-none">
+                            <div class="text-center">
+                                <i class="fas fa-plus-circle fa-3x text-success mb-3"></i>
+                                <h5>Add Subject</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('enter_marks') }}" class="quick-action-card animated-card text-decoration-none">
+                            <div class="text-center">
+                                <i class="fas fa-edit fa-3x text-info mb-3"></i>
+                                <h5>Enter Marks</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('generate_results') }}" class="quick-action-card animated-card text-decoration-none">
+                            <div class="text-center">
+                                <i class="fas fa-calculator fa-3x text-warning mb-3"></i>
+                                <h5>Generate Results</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-4 animated-heading">
+                    <i class="fas fa-history me-2"></i>System Information
+                </h4>
+                <div class="card animated-card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><i class="fas fa-database me-2 text-primary"></i><strong>Database:</strong> SQLite</p>
+                                <p><i class="fas fa-server me-2 text-primary"></i><strong>Framework:</strong> Flask</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><i class="fas fa-shield-alt me-2 text-primary"></i><strong>Status:</strong> Active</p>
+                                <p><i class="fas fa-clock me-2 text-primary"></i><strong>Version:</strong> 1.0.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
